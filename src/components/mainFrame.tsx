@@ -29,7 +29,21 @@ export class MainFrame extends React.Component<{}, {}> {
               )}-${this.storage.getItem('month')}-${this.storage.getItem(
                 'day',
               )}`;
-              console.log(checked);
+              let currentTime = new Date();
+              const targetTime = new Date();
+              targetTime.setHours(Number(this.storage.getItem('hour')));
+              targetTime.setMinutes(Number(this.storage.getItem('minute')));
+              targetTime.setSeconds(Number(this.storage.getItem('second')));
+              const waitInterval = Number(this.storage.getItem('waitInterval'));
+              while (currentTime < targetTime) {
+                currentTime = new Date();
+                console.log(
+                  `Sleeping for ${waitInterval} ms, Current Time: ${currentTime.toString()}, Target Time: ${targetTime.toString()}`,
+                );
+                await new Promise((resolve) =>
+                  setTimeout(resolve, waitInterval),
+                );
+              }
               for (let i = 0; i < TARGETS.length; i++) {
                 if (checked[i]) {
                   workOnTarget(TARGETS[i], date);

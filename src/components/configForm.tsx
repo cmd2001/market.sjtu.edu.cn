@@ -6,6 +6,7 @@ import {
   POST_FORM_INTERVAL_MAX_DEFAULT,
   POST_FORM_INTERVAL_MIN_DEFAULT,
   POST_FORM_RETRY_DEFAULT,
+  WAIT_INTERVAL_DEFAULT,
 } from '../constants/defaults';
 
 export class ConfigForm extends React.Component<
@@ -16,6 +17,7 @@ export class ConfigForm extends React.Component<
     postFormIntervalMin: number;
     postFormIntervalMax: number;
     postFormRetry: number;
+    waitInterval: number;
   }
 > {
   private readonly storage = window.localStorage;
@@ -36,6 +38,8 @@ export class ConfigForm extends React.Component<
       postFormRetry:
         Number(this.storage.getItem('postFormRetry')) ||
         POST_FORM_RETRY_DEFAULT,
+      waitInterval:
+        Number(this.storage.getItem('waitInterval')) || WAIT_INTERVAL_DEFAULT,
     };
     this.storage.setItem('getListInterval', String(this.state.getListInterval));
     this.storage.setItem('getListRetry', String(this.state.getListRetry));
@@ -48,6 +52,7 @@ export class ConfigForm extends React.Component<
       String(this.state.postFormIntervalMax),
     );
     this.storage.setItem('postFormRetry', String(this.state.postFormRetry));
+    this.storage.setItem('waitInterval', String(this.state.waitInterval));
   }
   render(): React.ReactNode {
     return (
@@ -73,6 +78,10 @@ export class ConfigForm extends React.Component<
             this.storage.setItem(
               'postFormRetry',
               String(this.state.postFormRetry),
+            );
+            this.storage.setItem(
+              'waitInterval',
+              String(this.state.waitInterval),
             );
           }}
           style={{
