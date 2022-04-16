@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button, Label } from 'reactstrap';
+import { Button, Card, Form, Label } from 'reactstrap';
 import { TARGETS } from '../constants/targets';
-import styles from './styles.css';
 
 export class TargetCheckbox extends React.Component<
   {},
@@ -23,15 +22,20 @@ export class TargetCheckbox extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <div className="app-boarder">
-        <form
+      <Card style={{ margin: '5px' }}>
+        <Form
           onSubmit={() => {
             this.storage.setItem(
               'targetCheckbox',
               JSON.stringify(this.state.checked),
             );
           }}
-          className="form-with-boarder"
+          style={{
+            marginLeft: '5%',
+            marginRight: '5%',
+            marginTop: '5px',
+            marginBottom: '5px',
+          }}
         >
           <Label className="display-4">你想要抢的什么：</Label>
           <div className="custom-control custom-checkbox">
@@ -81,8 +85,8 @@ export class TargetCheckbox extends React.Component<
               保存
             </Button>
           </div>
-        </form>
-      </div>
+        </Form>
+      </Card>
     );
   }
 }

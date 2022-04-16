@@ -3,13 +3,11 @@ import {
   FormGroup,
   Form,
   Input,
-  InputGroupText,
-  InputGroup,
   Row,
   Col,
   Button,
-  Container,
   Label,
+  Card,
 } from 'reactstrap';
 
 export class StartTimeForm extends React.Component<
@@ -30,14 +28,7 @@ export class StartTimeForm extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <div
-        style={{
-          borderWidth: '2px',
-          borderStyle: 'solid',
-          borderRadius: '5px',
-          backgroundColor: '#f6f9fc',
-        }}
-      >
+      <Card style={{ margin: '5px' }}>
         <Form
           onSubmit={() => {
             this.storage.setItem('hour', String(this.state.hour));
@@ -52,56 +43,44 @@ export class StartTimeForm extends React.Component<
           }}
         >
           <Label className="display-4">今天什么时间开抢：</Label>
-          <Row>
-            <Col>
-              <FormGroup>
-                <Label>时：</Label>
-                <Input
-                  placeholder="时"
-                  type="number"
-                  value={this.state.hour}
-                  onChange={(e) => {
-                    this.setState({ hour: Number(e.target.value) });
-                  }}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <FormGroup>
-                <Label>分：</Label>
-                <Input
-                  type="number"
-                  value={this.state.minute}
-                  onChange={(e) => {
-                    this.setState({ minute: Number(e.target.value) });
-                  }}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <FormGroup>
-                <Label>秒：</Label>
-                <Input
-                  type="number"
-                  value={this.state.second}
-                  onChange={(e) => {
-                    this.setState({ second: Number(e.target.value) });
-                  }}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
+          <FormGroup>
+            <Label>时：</Label>
+            <Input
+              placeholder="时"
+              type="number"
+              value={this.state.hour}
+              onChange={(e) => {
+                this.setState({ hour: Number(e.target.value) });
+              }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>分：</Label>
+            <Input
+              type="number"
+              value={this.state.minute}
+              onChange={(e) => {
+                this.setState({ minute: Number(e.target.value) });
+              }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>秒：</Label>
+            <Input
+              type="number"
+              value={this.state.second}
+              onChange={(e) => {
+                this.setState({ second: Number(e.target.value) });
+              }}
+            />
+          </FormGroup>
           <div style={{ textAlign: 'center' }}>
             <Button color="primary" type="submit" style={{ width: '66%' }}>
               保存
             </Button>
           </div>
         </Form>
-      </div>
+      </Card>
     );
   }
 }

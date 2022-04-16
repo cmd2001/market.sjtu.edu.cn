@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Card, Form, FormGroup, Input, Label } from 'reactstrap';
 
 export class DateForm extends React.Component<
   {},
@@ -20,46 +21,58 @@ export class DateForm extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <form
-        onSubmit={() => {
-          this.storage.setItem('year', String(this.state.year));
-          this.storage.setItem('month', String(this.state.month));
-          this.storage.setItem('day', String(this.state.day));
-        }}
-      >
-        想要抢哪天的：
-        <label>
-          年份:
-          <input
-            type="number"
-            value={this.state.year}
-            onChange={(e) => {
-              this.setState({ year: Number(e.target.value) });
-            }}
-          />
-        </label>
-        <label>
-          月份:
-          <input
-            type="number"
-            value={this.state.month}
-            onChange={(e) => {
-              this.setState({ month: Number(e.target.value) });
-            }}
-          />
-        </label>
-        <label>
-          日期:
-          <input
-            type="number"
-            value={this.state.day}
-            onChange={(e) => {
-              this.setState({ day: Number(e.target.value) });
-            }}
-          />
-        </label>
-        <input type="submit" value="保存" />
-      </form>
+      <Card style={{ margin: '5px' }}>
+        <Form
+          onSubmit={() => {
+            this.storage.setItem('year', String(this.state.year));
+            this.storage.setItem('month', String(this.state.month));
+            this.storage.setItem('day', String(this.state.day));
+          }}
+          style={{
+            marginLeft: '5%',
+            marginRight: '5%',
+            marginTop: '5px',
+            marginBottom: '5px',
+          }}
+        >
+          <Label className="display-4">想要抢哪天的：</Label>
+          <FormGroup>
+            <Label>年份:</Label>
+            <Input
+              type="number"
+              value={this.state.year}
+              onChange={(e) => {
+                this.setState({ year: Number(e.target.value) });
+              }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>月份:</Label>
+            <Input
+              type="number"
+              value={this.state.month}
+              onChange={(e) => {
+                this.setState({ month: Number(e.target.value) });
+              }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>日期:</Label>
+            <Input
+              type="number"
+              value={this.state.day}
+              onChange={(e) => {
+                this.setState({ day: Number(e.target.value) });
+              }}
+            />
+          </FormGroup>
+          <div style={{ textAlign: 'center' }}>
+            <Button color="primary" type="submit" style={{ width: '66%' }}>
+              保存
+            </Button>
+          </div>
+        </Form>
+      </Card>
     );
   }
 }
