@@ -1,5 +1,7 @@
 import React from 'react';
+import { Button, Label } from 'reactstrap';
 import { TARGETS } from '../constants/targets';
+import styles from './styles.css';
 
 export class TargetCheckbox extends React.Component<
   {},
@@ -21,46 +23,66 @@ export class TargetCheckbox extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <form
-        onSubmit={() => {
-          this.storage.setItem(
-            'targetCheckbox',
-            JSON.stringify(this.state.checked),
-          );
-        }}
-      >
-        你想要抢的什么：
-        {TARGETS.map((target, index) => (
-          <label key={index}>
-            <input
-              type="checkbox"
-              checked={this.state.checked[index]}
-              onChange={() => {
-                const checked = this.state.checked;
-                checked[index] = !checked[index];
-                this.setState({ checked });
-              }}
-            />
-            {target.name}
-          </label>
-        ))}
-        <label>
-          <input
-            type="checkbox"
-            checked={this.state.checked.every((v) => v)}
-            onChange={() => {
-              const checked = this.state.checked;
-              const allChecked = !checked.every((v) => v);
-              checked.forEach((v, i) => {
-                checked[i] = allChecked;
-              });
-              this.setState({ checked });
-            }}
-          />
-          我全都要！
-        </label>
-        <input type="submit" value="保存" />
-      </form>
+      <div className="app-boarder">
+        <form
+          onSubmit={() => {
+            this.storage.setItem(
+              'targetCheckbox',
+              JSON.stringify(this.state.checked),
+            );
+          }}
+          className="form-with-boarder"
+        >
+          <Label className="display-4">你想要抢的什么：</Label>
+          <div className="custom-control custom-checkbox">
+            {TARGETS.map((target, index) => (
+              <div key={index} style={{ width: '33%', float: 'left' }}>
+                <input
+                  className="custom-control-input"
+                  id={`targetCheckbox-${index}`}
+                  type="checkbox"
+                  checked={this.state.checked[index]}
+                  onChange={() => {
+                    const checked = this.state.checked;
+                    checked[index] = !checked[index];
+                    this.setState({ checked });
+                  }}
+                />
+                <label
+                  className="custom-control-label"
+                  htmlFor={`targetCheckbox-${index}`}
+                >
+                  {target.name}
+                </label>
+              </div>
+            ))}
+            <div style={{ width: '33%', float: 'left' }}>
+              <input
+                className="custom-control-input"
+                id="targetCheckbox-all"
+                type="checkbox"
+                checked={this.state.checked.every((v) => v)}
+                onChange={() => {
+                  const checked = this.state.checked;
+                  checked.fill(!checked.every((v) => v));
+                  this.setState({ checked });
+                }}
+              />
+              <label
+                className="custom-control-label"
+                htmlFor="targetCheckbox-all"
+              >
+                我全都要！
+              </label>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <Button color="primary" type="submit" style={{ width: '66%' }}>
+              保存
+            </Button>
+          </div>
+        </form>
+      </div>
     );
   }
 }

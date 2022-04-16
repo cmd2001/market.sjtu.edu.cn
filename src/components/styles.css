@@ -1,0 +1,13 @@
+.form-boarder {
+  border-width: '2px';
+  border-style: 'solid';
+  border-radius: '5px';
+  background-color: '#f6f9fc';
+}
+
+.form-with-borader {
+  margin-left: '5%';
+  margin-right: '5%';
+  margin-top: '5px';
+  margin-bottom: '5px';
+}
