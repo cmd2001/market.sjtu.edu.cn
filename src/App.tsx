@@ -9,26 +9,18 @@ import 'argon-design-system-react/src/assets/vendor/font-awesome/css/font-awesom
 import 'argon-design-system-react/src/assets/css/argon-design-system-react.css';
 import { Container } from 'reactstrap';
 import Navbars from './components/navbars';
+import { Terminal } from './components/terminal';
 const App: React.FC = () => {
   return (
     <div style={{ backgroundColor: '#ced4da', height: '100%' }}>
       <Navbars />
       <Container>
-        <>
-          <TargetCheckbox />
-        </>
-        <>
-          <DateForm />
-        </>
-        <>
-          <StartTimeForm />
-        </>
-        <>
-          <ConfigForm />
-        </>
-        <>
-          <MainFrame />
-        </>
+        <TargetCheckbox />
+        <DateForm />
+        <StartTimeForm />
+        <ConfigForm />
+        <Terminal />
+        <MainFrame />
       </Container>
     </div>
   );

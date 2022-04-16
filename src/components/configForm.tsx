@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Card, FormGroup, Input, Label } from 'reactstrap';
 import {
   GET_LIST_INTERVAL_DEFAULT,
   GET_LIST_RETRY_DEFAULT,
@@ -24,22 +24,26 @@ export class ConfigForm extends React.Component<
   constructor(props: {}) {
     super(props);
     this.state = {
-      getListInterval:
-        Number(this.storage.getItem('getListInterval')) ||
-        GET_LIST_INTERVAL_DEFAULT,
-      getListRetry:
-        Number(this.storage.getItem('getListRetry')) || GET_LIST_RETRY_DEFAULT,
-      postFormIntervalMin:
-        Number(this.storage.getItem('postFormIntervalMin')) ||
-        POST_FORM_INTERVAL_MIN_DEFAULT,
-      postFormIntervalMax:
-        Number(this.storage.getItem('postFormIntervalMax')) ||
-        POST_FORM_INTERVAL_MAX_DEFAULT,
-      postFormRetry:
-        Number(this.storage.getItem('postFormRetry')) ||
-        POST_FORM_RETRY_DEFAULT,
-      waitInterval:
-        Number(this.storage.getItem('waitInterval')) || WAIT_INTERVAL_DEFAULT,
+      getListInterval: Number(
+        this.storage.getItem('getListInterval') || GET_LIST_INTERVAL_DEFAULT,
+      ),
+      getListRetry: Number(
+        this.storage.getItem('getListRetry') || GET_LIST_RETRY_DEFAULT,
+      ),
+      postFormIntervalMin: Number(
+        this.storage.getItem('postFormIntervalMin') ||
+          POST_FORM_INTERVAL_MIN_DEFAULT,
+      ),
+      postFormIntervalMax: Number(
+        this.storage.getItem('postFormIntervalMax') ||
+          POST_FORM_INTERVAL_MAX_DEFAULT,
+      ),
+      postFormRetry: Number(
+        this.storage.getItem('postFormRetry') || POST_FORM_RETRY_DEFAULT,
+      ),
+      waitInterval: Number(
+        this.storage.getItem('waitInterval') || WAIT_INTERVAL_DEFAULT,
+      ),
     };
     this.storage.setItem('getListInterval', String(this.state.getListInterval));
     this.storage.setItem('getListRetry', String(this.state.getListRetry));
@@ -57,33 +61,7 @@ export class ConfigForm extends React.Component<
   render(): React.ReactNode {
     return (
       <Card style={{ margin: '5px' }}>
-        <Form
-          onSubmit={() => {
-            this.storage.setItem(
-              'getListInterval',
-              String(this.state.getListInterval),
-            );
-            this.storage.setItem(
-              'getListRetry',
-              String(this.state.getListRetry),
-            );
-            this.storage.setItem(
-              'postFormIntervalMin',
-              String(this.state.postFormIntervalMin),
-            );
-            this.storage.setItem(
-              'postFormIntervalMax',
-              String(this.state.postFormIntervalMax),
-            );
-            this.storage.setItem(
-              'postFormRetry',
-              String(this.state.postFormRetry),
-            );
-            this.storage.setItem(
-              'waitInterval',
-              String(this.state.waitInterval),
-            );
-          }}
+        <div
           style={{
             marginLeft: '5%',
             marginRight: '5%',
@@ -145,11 +123,40 @@ export class ConfigForm extends React.Component<
             />
           </FormGroup>
           <div style={{ textAlign: 'center' }}>
-            <Button color="primary" type="submit" style={{ width: '66%' }}>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.storage.setItem(
+                  'getListInterval',
+                  String(this.state.getListInterval),
+                );
+                this.storage.setItem(
+                  'getListRetry',
+                  String(this.state.getListRetry),
+                );
+                this.storage.setItem(
+                  'postFormIntervalMin',
+                  String(this.state.postFormIntervalMin),
+                );
+                this.storage.setItem(
+                  'postFormIntervalMax',
+                  String(this.state.postFormIntervalMax),
+                );
+                this.storage.setItem(
+                  'postFormRetry',
+                  String(this.state.postFormRetry),
+                );
+                this.storage.setItem(
+                  'waitInterval',
+                  String(this.state.waitInterval),
+                );
+              }}
+              style={{ width: '66%' }}
+            >
               保存
             </Button>
           </div>
-        </Form>
+        </div>
       </Card>
     );
   }

@@ -2,16 +2,19 @@ import { Target } from '../constants/targets';
 import postForm from './postForm';
 import { ListEntity } from './workOnTarget';
 
-export default async function workOnUuid(
-  target: Target,
-  listEntity: ListEntity,
-): Promise<boolean> {
+export default async function workOnUuid(params: {
+  target: Target;
+  listEntity: ListEntity;
+  log: (data: string) => void;
+}): Promise<boolean> {
+  const target = params.target;
+  const listEntity = params.listEntity;
   const storage = window.localStorage;
   const postFormIntervalMin = Number(storage.getItem('postFormIntervalMin'));
   const postFormInvervalMax = Number(storage.getItem('postFormIntervalMax'));
   const postFormRetry = Number(storage.getItem('postFormRetry'));
   for (let i = 0; i < postFormRetry; i++) {
-    console.log(
+    params.log(
       `Trying to Post Data to ${target.postUrl} with UUID ${
         listEntity.id
       } for ${i + 1} time`,
@@ -21,7 +24,7 @@ export default async function workOnUuid(
       uuid: listEntity.id,
     });
     if (res) {
-      console.log(
+      params.log(
         `Successfully Made Appointment for ${target.name} on ${listEntity.startTime} - ${listEntity.endTime}`,
       );
       return true;
@@ -30,15 +33,15 @@ export default async function workOnUuid(
       Math.random() * (postFormInvervalMax - postFormIntervalMin) +
         postFormIntervalMin,
     );
-    console.log(
+    params.log(
       `Failed to Post Data to ${target.postUrl} with UUID ${
         listEntity.id
       } for ${i + 1} time`,
     );
-    console.log(`Sleep for ${sleepTime} microseconds`);
+    params.log(`Sleep for ${sleepTime} microseconds for UUID ${listEntity.id}`);
     await new Promise((resolve) => setTimeout(resolve, sleepTime));
   }
-  console.log(
+  params.log(
     `Failed to Make Appointment for ${target.name} on ${listEntity.startTime} - ${listEntity.endTime} after ${postFormRetry} times`,
   );
   return false;

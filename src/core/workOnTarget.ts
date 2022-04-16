@@ -20,7 +20,13 @@ export interface ListEntity {
   isAppointmentLimited: boolean;
 }
 
-export default async function workOnTarget(target: Target, date: string) {
+export default async function workOnTarget(params: {
+  target: Target;
+  date: string;
+  log: (data: string) => void;
+}) {
+  const target = params.target;
+  const date = params.date;
   const storage = window.localStorage;
   const getListInterval = Number(storage.getItem('getListInterval'));
   const getListRetry = Number(storage.getItem('getListRetry'));
@@ -33,21 +39,18 @@ export default async function workOnTarget(target: Target, date: string) {
         lineType: target.lineType,
         date,
       });
-      if (res.status === 401) {
-        throw new Error(
-          `Invalid Cookie Or Header Settings For ${target.getUrl}`,
-        );
-      }
       if (res.status === 200) {
         ls = res.data.entities as ListEntity[];
       }
     } catch (e) {
+      params.log(`Invalid Cookie Or Header Settings For ${target.name}`);
       getListFailureTime++;
     } finally {
       await new Promise((resolve) => setTimeout(resolve, getListInterval));
     }
   }
+  params.log(`${target.name} list length: ${ls.length}`);
   ls.forEach(async (listEntity) => {
-    workOnUuid(target, listEntity);
+    workOnUuid({ target, listEntity, log: params.log });
   });
 }

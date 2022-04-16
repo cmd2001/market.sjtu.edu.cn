@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Card } from 'reactstrap';
 import { TARGETS } from '../constants/targets';
 import workOnTarget from '../core/workOnTarget';
+import { terminalLog } from './terminal';
 
 export class MainFrame extends React.Component<{}, {}> {
   private readonly storage = window.localStorage;
@@ -44,9 +45,16 @@ export class MainFrame extends React.Component<{}, {}> {
                   setTimeout(resolve, waitInterval),
                 );
               }
+              const terminalEnabled = JSON.parse(
+                this.storage.getItem('terminalEnabled') || 'false',
+              );
               for (let i = 0; i < TARGETS.length; i++) {
                 if (checked[i]) {
-                  workOnTarget(TARGETS[i], date);
+                  workOnTarget({
+                    target: TARGETS[i],
+                    date,
+                    log: terminalEnabled ? terminalLog : console.log,
+                  });
                 }
               }
             }}

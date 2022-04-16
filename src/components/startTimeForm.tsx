@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  FormGroup,
-  Form,
-  Input,
-  Row,
-  Col,
-  Button,
-  Label,
-  Card,
-} from 'reactstrap';
+import { FormGroup, Input, Button, Label, Card } from 'reactstrap';
 
 export class StartTimeForm extends React.Component<
   {},
@@ -18,9 +9,9 @@ export class StartTimeForm extends React.Component<
   constructor(props: {}) {
     super(props);
     this.state = {
-      hour: Number(this.storage.getItem('hour')) || 20,
-      minute: Number(this.storage.getItem('minute')) || 30,
-      second: Number(this.storage.getItem('second')) || 0,
+      hour: Number(this.storage.getItem('hour') || 20),
+      minute: Number(this.storage.getItem('minute') || 30),
+      second: Number(this.storage.getItem('second') || 0),
     };
     this.storage.setItem('hour', String(this.state.hour));
     this.storage.setItem('minute', String(this.state.minute));
@@ -29,12 +20,7 @@ export class StartTimeForm extends React.Component<
   render(): React.ReactNode {
     return (
       <Card style={{ margin: '5px' }}>
-        <Form
-          onSubmit={() => {
-            this.storage.setItem('hour', String(this.state.hour));
-            this.storage.setItem('minute', String(this.state.minute));
-            this.storage.setItem('second', String(this.state.second));
-          }}
+        <div
           style={{
             marginLeft: '5%',
             marginRight: '5%',
@@ -75,11 +61,19 @@ export class StartTimeForm extends React.Component<
             />
           </FormGroup>
           <div style={{ textAlign: 'center' }}>
-            <Button color="primary" type="submit" style={{ width: '66%' }}>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.storage.setItem('hour', String(this.state.hour));
+                this.storage.setItem('minute', String(this.state.minute));
+                this.storage.setItem('second', String(this.state.second));
+              }}
+              style={{ width: '66%' }}
+            >
               保存
             </Button>
           </div>
-        </Form>
+        </div>
       </Card>
     );
   }

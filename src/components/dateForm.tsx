@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Card, FormGroup, Input, Label } from 'reactstrap';
 
 export class DateForm extends React.Component<
   {},
@@ -11,9 +11,9 @@ export class DateForm extends React.Component<
     const date = new Date();
     date.setDate(date.getDate() + 1);
     this.state = {
-      year: Number(this.storage.getItem('year')) || date.getFullYear(),
-      month: Number(this.storage.getItem('month')) || date.getMonth() + 1, // 0-11
-      day: Number(this.storage.getItem('day')) || date.getDate(),
+      year: Number(this.storage.getItem('year') || date.getFullYear()),
+      month: Number(this.storage.getItem('month') || date.getMonth() + 1), // 0-11
+      day: Number(this.storage.getItem('day') || date.getDate()),
     };
     this.storage.setItem('year', String(this.state.year));
     this.storage.setItem('month', String(this.state.month));
@@ -22,12 +22,7 @@ export class DateForm extends React.Component<
   render(): React.ReactNode {
     return (
       <Card style={{ margin: '5px' }}>
-        <Form
-          onSubmit={() => {
-            this.storage.setItem('year', String(this.state.year));
-            this.storage.setItem('month', String(this.state.month));
-            this.storage.setItem('day', String(this.state.day));
-          }}
+        <div
           style={{
             marginLeft: '5%',
             marginRight: '5%',
@@ -67,11 +62,19 @@ export class DateForm extends React.Component<
             />
           </FormGroup>
           <div style={{ textAlign: 'center' }}>
-            <Button color="primary" type="submit" style={{ width: '66%' }}>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.storage.setItem('year', String(this.state.year));
+                this.storage.setItem('month', String(this.state.month));
+                this.storage.setItem('day', String(this.state.day));
+              }}
+              style={{ width: '66%' }}
+            >
               保存
             </Button>
           </div>
-        </Form>
+        </div>
       </Card>
     );
   }

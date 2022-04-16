@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Form, Label } from 'reactstrap';
+import { Button, Card, Label } from 'reactstrap';
 import { TARGETS } from '../constants/targets';
 
 export class TargetCheckbox extends React.Component<
@@ -23,13 +23,7 @@ export class TargetCheckbox extends React.Component<
   render(): React.ReactNode {
     return (
       <Card style={{ margin: '5px' }}>
-        <Form
-          onSubmit={() => {
-            this.storage.setItem(
-              'targetCheckbox',
-              JSON.stringify(this.state.checked),
-            );
-          }}
+        <div
           style={{
             marginLeft: '5%',
             marginRight: '5%',
@@ -81,11 +75,20 @@ export class TargetCheckbox extends React.Component<
             </div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <Button color="primary" type="submit" style={{ width: '66%' }}>
+            <Button
+              color="primary"
+              onClick={() => {
+                this.storage.setItem(
+                  'targetCheckbox',
+                  JSON.stringify(this.state.checked),
+                );
+              }}
+              style={{ width: '66%' }}
+            >
               保存
             </Button>
           </div>
-        </Form>
+        </div>
       </Card>
     );
   }
