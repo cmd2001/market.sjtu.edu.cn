@@ -47,7 +47,6 @@ export default async function workOnTarget(target: Target, date: string) {
       await new Promise((resolve) => setTimeout(resolve, getListInterval));
     }
   }
-  console.log(ls);
   ls.forEach(async (listEntity) => {
     workOnUuid(target, listEntity);
   });

@@ -6,7 +6,7 @@ import {
   POST_FORM_INTERVAL_MAX_DEFAULT,
   POST_FORM_INTERVAL_MIN_DEFAULT,
   POST_FORM_RETRY_DEFAULT,
-} from '../constants/config';
+} from '../constants/defaults';
 
 export class ConfigForm extends React.Component<
   {},

@@ -8,9 +8,8 @@ export default async function workOnUuid(
 ): Promise<boolean> {
   const storage = window.localStorage;
   const postFormIntervalMin = Number(storage.getItem('postFormIntervalMin'));
-  const postFormInvervalMax = Number(storage.getItem('postFormInvervalMax'));
+  const postFormInvervalMax = Number(storage.getItem('postFormIntervalMax'));
   const postFormRetry = Number(storage.getItem('postFormRetry'));
-  console.log(postFormIntervalMin, postFormInvervalMax);
   for (let i = 0; i < postFormRetry; i++) {
     console.log(
       `Trying to Post Data to ${target.postUrl} with UUID ${
