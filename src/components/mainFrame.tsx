@@ -28,24 +28,34 @@ export class MainFrame extends React.Component<{}, {}> {
               targetTime.setMinutes(Number(this.storage.getItem('minute')));
               targetTime.setSeconds(Number(this.storage.getItem('second')));
               const waitInterval = Number(this.storage.getItem('waitInterval'));
+              const terminalEnabled = JSON.parse(
+                this.storage.getItem('terminalEnabled') || 'false',
+              );
+              const log = terminalEnabled ? terminalLog : console.log;
               while (currentTime < targetTime) {
                 currentTime = new Date();
-                console.log(
-                  `Sleeping for ${waitInterval} ms, Current Time: ${currentTime.toString()}, Target Time: ${targetTime.toString()}`,
+                const deltaTime = targetTime.getTime() - currentTime.getTime();
+                const hours = Math.floor(deltaTime / (1000 * 60 * 60));
+                const minutes = Math.floor(
+                  (deltaTime - hours * 1000 * 60 * 60) / (1000 * 60),
+                );
+                const seconds = Math.floor(
+                  (deltaTime - hours * 1000 * 60 * 60 - minutes * 1000 * 60) /
+                    1000,
+                );
+                log(
+                  `${hours}:${minutes}:${seconds} Before Work, Sleeping for ${waitInterval} ms`,
                 );
                 await new Promise((resolve) =>
                   setTimeout(resolve, waitInterval),
                 );
               }
-              const terminalEnabled = JSON.parse(
-                this.storage.getItem('terminalEnabled') || 'false',
-              );
               for (let i = 0; i < TARGETS.length; i++) {
                 if (checked[i]) {
                   workOnTarget({
                     target: TARGETS[i],
                     date,
-                    log: terminalEnabled ? terminalLog : console.log,
+                    log,
                   });
                 }
               }

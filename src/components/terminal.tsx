@@ -68,5 +68,6 @@ export class Terminal extends React.Component<
     const newElement = document.createElement('div');
     newElement.innerHTML = arg;
     terminalScreen.current?.appendChild(newElement);
+    terminalScreen.current?.scrollTo(0, terminalScreen.current?.scrollHeight);
   };
 }
