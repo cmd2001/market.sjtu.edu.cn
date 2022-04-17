@@ -7,40 +7,36 @@ export const terminalEventBus = new EventEmitter();
 export function terminalLog(data: string) {
   terminalEventBus.emit('terminalLog', data);
 }
-let counter = 0;
+
 export class Terminal extends React.Component<
   {},
-  { data: string[]; terminalEnabled: boolean }
+  { terminalEnabled: boolean }
 > {
   private readonly storage = window.localStorage;
+  private terminalScreen: React.RefObject<HTMLDivElement>;
   constructor(props: {}) {
     super(props);
     this.state = {
-      data: [],
       terminalEnabled: JSON.parse(
         this.storage.getItem('terminalEnabled') || 'false',
       ),
     };
+    this.terminalScreen = React.createRef();
     this.storage.setItem('terminalEnabled', String(this.state.terminalEnabled));
   }
   render(): React.ReactNode {
     const terminal = this.state.terminalEnabled ? (
       <div
+        ref={this.terminalScreen}
         style={{
           background: 'black',
           color: 'white',
           fontFamily: 'monospace',
-          lineHeight: '50%',
+          lineHeight: '100%',
           overflow: 'scroll',
           height: '50vh',
         }}
-      >
-        {this.state.data.map((item, index) => (
-          <div key={index}>
-            <Label>{item}</Label>
-          </div>
-        ))}
-      </div>
+      ></div>
     ) : null;
     return (
       <Card style={{ margin: '5px' }}>
@@ -84,6 +80,9 @@ export class Terminal extends React.Component<
     terminalEventBus.removeListener('terminalLog', this.handleListener);
   }
   handleListener = (arg: string) => {
-    this.setState({ data: [...this.state.data, arg] });
+    const terminalScreen = this.terminalScreen;
+    const newElement = document.createElement('div');
+    newElement.innerHTML = arg;
+    terminalScreen.current?.appendChild(newElement);
   };
 }
