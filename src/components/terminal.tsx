@@ -1,6 +1,7 @@
 import React from 'react';
 import { EventEmitter } from 'events';
 import { Card, Input, Label } from 'reactstrap';
+import '../styles/style.css';
 
 export const terminalEventBus = new EventEmitter();
 
@@ -26,28 +27,11 @@ export class Terminal extends React.Component<
   }
   render(): React.ReactNode {
     const terminal = this.state.terminalEnabled ? (
-      <div
-        ref={this.terminalScreen}
-        style={{
-          background: 'black',
-          color: 'white',
-          fontFamily: 'monospace',
-          lineHeight: '100%',
-          overflow: 'scroll',
-          height: '50vh',
-        }}
-      ></div>
+      <div ref={this.terminalScreen} className="terminal-text"></div>
     ) : null;
     return (
-      <Card style={{ margin: '5px' }}>
-        <div
-          style={{
-            marginLeft: '5%',
-            marginRight: '5%',
-            marginTop: '5px',
-            marginBottom: '5px',
-          }}
-        >
+      <Card class="form-card">
+        <div className="terminal-screen">
           <div className="custom-control custom-checkbox">
             <Input
               className="custom-control-input"

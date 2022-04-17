@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, FormGroup, Input, Label } from 'reactstrap';
+import '../styles/style.css';
 
 export class DateForm extends React.Component<
   {},
@@ -21,15 +22,8 @@ export class DateForm extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <Card style={{ margin: '5px' }}>
-        <div
-          style={{
-            marginLeft: '5%',
-            marginRight: '5%',
-            marginTop: '5px',
-            marginBottom: '5px',
-          }}
-        >
+      <Card className="form-card">
+        <div className="custom-form">
           <Label className="display-4">想要抢哪天的：</Label>
           <FormGroup>
             <Label>年份:</Label>
@@ -61,7 +55,7 @@ export class DateForm extends React.Component<
               }}
             />
           </FormGroup>
-          <div style={{ textAlign: 'center' }}>
+          <div className="align-center">
             <Button
               color="primary"
               onClick={() => {
@@ -69,7 +63,7 @@ export class DateForm extends React.Component<
                 this.storage.setItem('month', String(this.state.month));
                 this.storage.setItem('day', String(this.state.day));
               }}
-              style={{ width: '66%' }}
+              className="save-button"
             >
               保存
             </Button>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormGroup, Input, Button, Label, Card } from 'reactstrap';
+import '../styles/style.css';
 
 export class StartTimeForm extends React.Component<
   {},
@@ -19,15 +20,8 @@ export class StartTimeForm extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <Card style={{ margin: '5px' }}>
-        <div
-          style={{
-            marginLeft: '5%',
-            marginRight: '5%',
-            marginTop: '5px',
-            marginBottom: '5px',
-          }}
-        >
+      <Card className="form-card">
+        <div className="custom-form">
           <Label className="display-4">今天什么时间开抢：</Label>
           <FormGroup>
             <Label>时：</Label>
@@ -60,7 +54,7 @@ export class StartTimeForm extends React.Component<
               }}
             />
           </FormGroup>
-          <div style={{ textAlign: 'center' }}>
+          <div className="align-center">
             <Button
               color="primary"
               onClick={() => {
@@ -68,7 +62,7 @@ export class StartTimeForm extends React.Component<
                 this.storage.setItem('minute', String(this.state.minute));
                 this.storage.setItem('second', String(this.state.second));
               }}
-              style={{ width: '66%' }}
+              className="save-button"
             >
               保存
             </Button>

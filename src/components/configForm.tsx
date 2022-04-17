@@ -8,6 +8,7 @@ import {
   POST_FORM_RETRY_DEFAULT,
   WAIT_INTERVAL_DEFAULT,
 } from '../constants/defaults';
+import '../styles/style.css';
 
 export class ConfigForm extends React.Component<
   {},
@@ -60,15 +61,8 @@ export class ConfigForm extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <Card style={{ margin: '5px' }}>
-        <div
-          style={{
-            marginLeft: '5%',
-            marginRight: '5%',
-            marginTop: '5px',
-            marginBottom: '5px',
-          }}
-        >
+      <Card className="form-card">
+        <div className="custom-form">
           <Label className="display-4">配置参数：</Label>
           <FormGroup>
             <Label>获取列表间隔：</Label>
@@ -122,7 +116,7 @@ export class ConfigForm extends React.Component<
               }}
             />
           </FormGroup>
-          <div style={{ textAlign: 'center' }}>
+          <div className="align-center">
             <Button
               color="primary"
               onClick={() => {
@@ -151,7 +145,7 @@ export class ConfigForm extends React.Component<
                   String(this.state.waitInterval),
                 );
               }}
-              style={{ width: '66%' }}
+              className="save-button"
             >
               保存
             </Button>

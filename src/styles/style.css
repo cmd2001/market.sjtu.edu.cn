@@ -1,0 +1,34 @@
+.form-card {
+  margin: 5px;
+}
+.custom-form {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.align-center {
+  text-align: center;
+}
+.save-button {
+  width: 66%;
+}
+.target-checkbox {
+  width: 33%;
+  float: left;
+}
+.terminal-screen {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.terminal-text {
+  background: black;
+  color: white;
+  line-height: 120%;
+  overflow: scroll;
+  height: 50vh;
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}

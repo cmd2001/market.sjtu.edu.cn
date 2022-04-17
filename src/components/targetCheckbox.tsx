@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Card, Label } from 'reactstrap';
 import { TARGETS } from '../constants/targets';
+import '../styles/style.css';
 
 export class TargetCheckbox extends React.Component<
   {},
@@ -22,19 +23,12 @@ export class TargetCheckbox extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <Card style={{ margin: '5px' }}>
-        <div
-          style={{
-            marginLeft: '5%',
-            marginRight: '5%',
-            marginTop: '5px',
-            marginBottom: '5px',
-          }}
-        >
+      <Card className="form-card">
+        <div className="custom-form">
           <Label className="display-4">你想要抢的什么：</Label>
           <div className="custom-control custom-checkbox">
             {TARGETS.map((target, index) => (
-              <div key={index} style={{ width: '33%', float: 'left' }}>
+              <div key={index} className="target-checkbox">
                 <input
                   className="custom-control-input"
                   id={`targetCheckbox-${index}`}
@@ -54,7 +48,7 @@ export class TargetCheckbox extends React.Component<
                 </label>
               </div>
             ))}
-            <div style={{ width: '33%', float: 'left' }}>
+            <div className="target-checkbox">
               <input
                 className="custom-control-input"
                 id="targetCheckbox-all"
@@ -74,7 +68,7 @@ export class TargetCheckbox extends React.Component<
               </label>
             </div>
           </div>
-          <div style={{ textAlign: 'center' }}>
+          <div className="align-center">
             <Button
               color="primary"
               onClick={() => {
@@ -83,7 +77,7 @@ export class TargetCheckbox extends React.Component<
                   JSON.stringify(this.state.checked),
                 );
               }}
-              style={{ width: '66%' }}
+              className="save-button"
             >
               保存
             </Button>

@@ -3,23 +3,15 @@ import { Button, Card } from 'reactstrap';
 import { TARGETS } from '../constants/targets';
 import workOnTarget from '../core/workOnTarget';
 import { terminalLog } from './terminal';
+import '../styles/style.css';
 
 export class MainFrame extends React.Component<{}, {}> {
   private readonly storage = window.localStorage;
   render(): React.ReactNode {
     return (
-      <Card style={{ margin: '5px' }}>
-        <div
-          style={{
-            textAlign: 'center',
-            marginLeft: '5%',
-            marginRight: '5%',
-            marginTop: '5px',
-            marginBottom: '5px',
-          }}
-        >
+      <Card className="form-card">
+        <div className="custom-form align-center">
           <Button
-            style={{ width: '66%' }}
             color="danger"
             onClick={async () => {
               const checked = JSON.parse(
@@ -58,6 +50,7 @@ export class MainFrame extends React.Component<{}, {}> {
                 }
               }
             }}
+            className="save-button"
           >
             开始
           </Button>
