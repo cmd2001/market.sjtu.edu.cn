@@ -32,3 +32,7 @@
   font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
+.app {
+  background-color: #ced4da;
+  height: 100%;
+}

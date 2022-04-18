@@ -30,7 +30,7 @@ export class Terminal extends React.Component<
       <div ref={this.terminalScreen} className="terminal-text"></div>
     ) : null;
     return (
-      <Card class="form-card">
+      <Card className="form-card">
         <div className="terminal-screen">
           <div className="custom-control custom-checkbox">
             <Input
