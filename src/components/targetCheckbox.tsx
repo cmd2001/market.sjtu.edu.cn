@@ -51,6 +51,50 @@ export class TargetCheckbox extends React.Component<
             <div className="target-checkbox">
               <input
                 className="custom-control-input"
+                id="targetCheckbox-all-market"
+                type="checkbox"
+                checked={this.state.checked.slice(0, 3).every((v) => v)}
+                onChange={() => {
+                  const checked = this.state.checked;
+                  const target = !this.state.checked
+                    .slice(0, 3)
+                    .every((v) => v);
+                  checked.fill(target, 0, 3);
+                  this.setState({ checked });
+                }}
+              />
+              <label
+                className="custom-control-label"
+                htmlFor="targetCheckbox-all-market"
+              >
+                全选超市
+              </label>
+            </div>
+            <div className="target-checkbox">
+              <input
+                className="custom-control-input"
+                id="targetCheckbox-all-haircut"
+                type="checkbox"
+                checked={this.state.checked.slice(3, 6).every((v) => v)}
+                onChange={() => {
+                  const checked = this.state.checked;
+                  const target = !this.state.checked
+                    .slice(3, 6)
+                    .every((v) => v);
+                  checked.fill(target, 3, 6);
+                  this.setState({ checked });
+                }}
+              />
+              <label
+                className="custom-control-label"
+                htmlFor="targetCheckbox-all-haircut"
+              >
+                全选理发
+              </label>
+            </div>
+            <div className="target-checkbox">
+              <input
+                className="custom-control-input"
                 id="targetCheckbox-all"
                 type="checkbox"
                 checked={this.state.checked.every((v) => v)}

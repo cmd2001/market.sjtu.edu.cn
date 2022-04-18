@@ -22,6 +22,14 @@ export const TARGETS: Target[] = [
       'https://dailyreport.sjtu.edu.cn/market/frontend/market/appointment/save/',
   },
   {
+    name: '东区教育超市',
+    getUrl:
+      'https://dailyreport.sjtu.edu.cn/market/frontend/market/schedule/list',
+    lineType: 'DQJYCS',
+    postUrl:
+      'https://dailyreport.sjtu.edu.cn/market/frontend/market/appointment/save/',
+  },
+  {
     name: '二餐理发',
     getUrl:
       'https://dailyreport.sjtu.edu.cn/haircut/frontend/bus/schedule/list',

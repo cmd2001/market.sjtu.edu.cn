@@ -35,6 +35,9 @@ export class MainFrame extends React.Component<{}, {}> {
               while (currentTime < targetTime) {
                 currentTime = new Date();
                 const deltaTime = targetTime.getTime() - currentTime.getTime();
+                if (deltaTime < 0) {
+                  break;
+                }
                 const hours = Math.floor(deltaTime / (1000 * 60 * 60));
                 const minutes = Math.floor(
                   (deltaTime - hours * 1000 * 60 * 60) / (1000 * 60),
@@ -44,12 +47,13 @@ export class MainFrame extends React.Component<{}, {}> {
                     1000,
                 );
                 log(
-                  `${hours}:${minutes}:${seconds} Before Work, Sleeping for ${waitInterval} ms`,
+                  `${hours}:${minutes}:${seconds} Before Start, Sleeping for ${waitInterval} ms`,
                 );
                 await new Promise((resolve) =>
                   setTimeout(resolve, waitInterval),
                 );
               }
+              log('Start !');
               for (let i = 0; i < TARGETS.length; i++) {
                 if (checked[i]) {
                   workOnTarget({
